@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Name</th>
+            <th> Age</th>
+            <th> City</th>
+            <th> Update</th>
+            <th> Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${users.size() == 0}">
+            <td colspan="2"> No users</td>
+        </tr>
+        <tr th:each="user : ${users}" >
+            <form th:method="POST" th:action="@{/users/update}" th:object="${user}">
+                <td><input type="text" th:value="${user.getId()}" style="background-color:#FDBDBA" id="id" name="id" readonly/></td>
+                <td><input type="text" th:value="${user.getName()}" id="name" name="name"/></td>
+                <td><input type="text" th:value="${user.getAge()}" id="age" name="age"/></td>
+                <td><input type="text" th:value="${user.getCity()}" id="city" name="city"/></td>
+                <td><input type="submit" value="Update"></td>
+                <td><span>
+                <a type="submit" th:href="@{/users/remove(id=${user.getId()})}">Delete</a>
+            </span></td>
+            </form>
+            <!--            <td><span th:text="${user.getAge()}"> Age </span></td>-->
+            <!--            <td><span th:text="${user.getCity()}"> City </span></td>-->
+
+            <!--            <td><span>-->
+            <!--                <form th:method="POST" th:action="@{/users}" th:object="${user}">-->
+            <!--                    <label for="name">Enter name:</label>-->
+
+            <!--                    <br>-->
+            <!--                    <label for="age">Enter age:</label>-->
+            <!--                    <input type="number" th:field="*{age}" id="updateAge"/>-->
+            <!--                    <br>-->
+            <!--                    <label for="city">Enter city:</label>-->
+            <!--                    <input type="text" th:field="*{city}" id="updateCity"/>-->
+            <!--                    <br>-->
+
+            <!--                </form>-->
+            <!--            </span></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <label for="name">Enter name:</label>
+    <input type="text" th:field="*{name}" id="name1"/>
+    <br>
+    <label for="age">Enter age:</label>
+    <input type="number" th:field="*{age}" id="age1"/>
+    <br>
+    <label for="city">Enter city:</label>
+    <input type="text" th:field="*{city}" id="city3"/>
+    <br>
+    <input type="submit" value="Create!">
+</form>
+
+</body>
+</html>
