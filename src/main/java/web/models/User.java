@@ -9,17 +9,16 @@ import javax.persistence.*;
 @Table(name = "users")
 @Component
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "age")
     private int age;
     @Column(name = "city")
     private String city;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
     public User(String name, int age, String city) {
         this.name = name;
@@ -28,7 +27,6 @@ public class User {
     }
 
     public User() {
-
     }
 
     public String getName() {
